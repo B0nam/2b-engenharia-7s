@@ -9,7 +9,7 @@ import jakarta.persistence.Id
 data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    var id: Long,
+    var id: Long?,
     var name: String,
     var description: String,
     var tags: List<String>?
