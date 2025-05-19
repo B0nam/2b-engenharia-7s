@@ -14,6 +14,7 @@ data class Task(
     var description: String,
     var tags: List<String>?
 ) {
+    constructor() : this(null, "", "", null)
     constructor(id: Long, name: String, description: String) : this(id, name, description, null)
     constructor(id: Long, name: String) : this(id, name, "", null)
 }

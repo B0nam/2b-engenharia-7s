@@ -14,7 +14,7 @@ class TaskController(var service: TaskService) {
     fun getAllTasks(): List<TaskResponseDTO> = service.getAllTask()
 
     @PostMapping
-    fun addTask(taskRequestDTO: TaskRequestDTO): TaskResponseDTO = service.addTask(taskRequestDTO)
+    fun addTask(@RequestBody taskRequestDTO: TaskRequestDTO): TaskResponseDTO = service.addTask(taskRequestDTO)
 
     @PatchMapping("/{id}")
     fun editTask(@PathVariable id: Long, taskRequestDTO: TaskRequestDTO): TaskResponseDTO =
