@@ -18,18 +18,20 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .authorizeHttpRequests {
-                it.requestMatchers(
-                    "/auth/**",
-                    "/users/register",
-                    "/v3/api-docs/**",
-                    "/swagger-ui/**",
-                    "/swagger-ui.html",
-                    "/swagger-ui/index.html"
-                ).permitAll()
-                it.requestMatchers(HttpMethod.DELETE, "/task/**").hasRole("ADMIN")
-                it.requestMatchers("/task/**").authenticated()
-                it.anyRequest().authenticated()
+                it.anyRequest().permitAll()
             }
+//                it.requestMatchers(
+//                    "/auth/**",
+//                    "/users/register",
+//                    "/v3/api-docs/**",
+//                    "/swagger-ui/**",
+//                    "/swagger-ui.html",
+//                    "/swagger-ui/index.html"
+//                ).permitAll()
+//                it.requestMatchers(HttpMethod.DELETE, "/task/**").hasRole("ADMIN")
+//                it.requestMatchers("/task/**").authenticated()
+//                it.anyRequest().authenticated()
+//            }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }

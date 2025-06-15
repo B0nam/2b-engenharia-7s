@@ -21,7 +21,7 @@ class JwtUtil {
             .compact()
     }
 
-    fun validateToken(token: String): String? {
+    fun validateToken(token: String?): String? {
         return try {
             val claims = Jwts.parserBuilder()
                 .setSigningKey(secret)
