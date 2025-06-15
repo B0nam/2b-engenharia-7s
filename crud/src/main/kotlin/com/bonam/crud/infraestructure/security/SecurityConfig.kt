@@ -1,7 +1,8 @@
-package com.bonam.crud.security
+package com.bonam.crud.infraestructure.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -17,9 +18,17 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .authorizeHttpRequests {
-//                it.requestMatchers("/auth/**", "/task/**").permitAll()
-//                    .anyRequest().authenticated()
-                it.anyRequest().permitAll()
+                it.requestMatchers(
+                    "/auth/**",
+                    "/users/register",
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/swagger-ui/index.html"
+                ).permitAll()
+                it.requestMatchers(HttpMethod.DELETE, "/task/**").hasRole("ADMIN")
+                it.requestMatchers("/task/**").authenticated()
+                it.anyRequest().authenticated()
             }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
